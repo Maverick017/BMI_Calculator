@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+
+  <body
+    class="min-h-screen bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-800 font-sans flex items-center justify-center p-4"
+  >
+    <div class="w-full max-w-lg">
+      <div
+        class="bg-white rounded-3xl text-center relative shadow-2xl p-6 border-t-4 border-indigo-500"
+      >
+        <h1
+          class="font-bold text-xl sm:text-3xl mt-6 mb-6 sm:mb-8 bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text"
+        >
+          BMI Calculator
+        </h1>
+
+        <div class="space-y-4 sm:space-y-6">
+          <div
+            class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow duration-300"
+          >
+            <div class="flex justify-between items-center mb-3">
+              <label
+                for="height"
+                class="text-sm sm:text-base font-semibold text-gray-700"
+              >
+                <i class="fas fa-ruler-vertical text-indigo-500 mr-2"></i>Height
+              </label>
+              <select
+                id="height-unit"
+                class="outline-none border-b-2 border-indigo-400 bg-transparent focus:border-purple-500 text-gray-700 pl-2 pr-6 py-1 rounded-md appearance-none cursor-pointer"
+              >
+                <option value="cm">cm</option>
+                <option value="feet">ft/in</option>
+              </select>
+            </div>
+            <div id="cm-input" class="height-input">
+              <div class="relative">
+                <input
+                  type="number"
+                  autocomplete="off"
+                  id="height"
+                  class="outline-none border-b-2 border-indigo-400 w-full text-center text-lg sm:text-xl py-2 bg-transparent focus:border-purple-500 transition duration-300"
+                  placeholder="Enter height"
+                />
+              </div>
+            </div>
+            <div id="feet-input" class="height-input hidden">
+              <div class="flex space-x-4">
+                <div class="w-1/2 relative">
+                  <input
+                    type="number"
+                    autocomplete="off"
+                    id="feet"
+                    class="outline-none border-b-2 border-indigo-400 w-full text-center text-lg sm:text-xl py-2 bg-transparent focus:border-purple-500 transition duration-300"
+                    placeholder="Feet"
+                  />
+                </div>
+                <div class="w-1/2 relative">
+                  <input
+                    type="number"
+                    autocomplete="off"
+                    id="inches"
+                    class="outline-none border-b-2 border-indigo-400 w-full text-center text-lg sm:text-xl py-2 bg-transparent focus:border-purple-500 transition duration-300"
+                    placeholder="Inches"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow duration-300"
+          >
+            <div class="flex justify-between items-center mb-3">
+              <label
+                for="weight"
+                class="text-base sm:text-lg font-semibold text-gray-700"
+              >
+                <i class="fas fa-weight text-indigo-500 mr-2"></i>Weight
+              </label>
+              <select
+                id="weight-unit"
+                class="outline-none border-b-2 border-indigo-400 bg-transparent focus:border-purple-500 text-gray-700 pl-2 pr-6 py-1 rounded-md appearance-none cursor-pointer"
+              >
+                <option value="kg">kg</option>
+                <option value="lb">lb</option>
+              </select>
+            </div>
+            <div class="relative">
+              <input
+                type="number"
+                autocomplete="off"
+                id="weight"
+                class="outline-none border-b-2 border-indigo-400 w-full text-center text-lg sm:text-xl py-2 bg-transparent focus:border-purple-500 transition duration-300"
+                placeholder="Enter weight"
+              />
+            </div>
+          </div>
+
+          <button
+            id="calculate"
+            class="font-sans text-white bg-gradient-to-r from-indigo-500 to-purple-600 text-base sm:text-lg rounded-xl py-3 w-full transition duration-300 hover:opacity-90 transform hover:scale-[1.01] shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            <i class="fas fa-calculator mr-2"></i>Calculate BMI
+          </button>
+        </div>
+
+        <div class="mt-4 sm:mt-5 mb-1">
+          <p class="font-semibold text-lg sm:text-xl text-gray-700 mb-3">
+            Your BMI is
+          </p>
+          <div
+            id="result"
+            class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-indigo-500 to-purple-600 text-transparent bg-clip-text inline-block py-2"
+          >
+            00.00
+          </div>
+          <div class="mt-3 mb-1">
+            <div class="flex justify-between items-center px-1">
+              <span class="text-xs text-indigo-500 font-bold">Underweight</span>
+              <span class="text-xs text-green-500 font-bold">Normal</span>
+              <span class="text-xs text-yellow-500 font-bold">Overweight</span>
+              <span class="text-xs text-red-500 font-bold">Obese</span>
+            </div>
+            <div class="h-2 w-full bg-gray-200 rounded-full my-1 relative">
+              <div class="absolute top-0 left-0 right-0 h-full flex">
+                <div class="h-full bg-indigo-500 flex-1 rounded-l-full"></div>
+                <div class="h-full bg-green-500 flex-1"></div>
+                <div class="h-full bg-yellow-500 flex-1"></div>
+                <div class="h-full bg-red-500 flex-1 rounded-r-full"></div>
+              </div>
+              <div
+                id="bmi-indicator"
+                class="absolute h-4 w-4 bg-white rounded-full shadow-md top-1/2 left-0 -translate-y-1/2 transform -translate-x-1/2 hidden"
+              ></div>
+            </div>
+          </div>
+          <p
+            class="comment text-base sm:text-lg font-medium mt-4 text-gray-700"
+          ></p>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
