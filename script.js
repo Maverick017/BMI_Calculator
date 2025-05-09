@@ -67,7 +67,7 @@ calculateBtn.addEventListener("click", function () {
 
   if (bmi < 18.5) {
     category = "You Are Underweight";
-    categoryClass = "text-indigo-500";
+    categoryClass = "text-blue-500";
   } else if (bmi >= 18.5 && bmi < 25) {
     category = "You Are Healthy";
     categoryClass = "text-green-500";
@@ -81,12 +81,23 @@ calculateBtn.addEventListener("click", function () {
 
   const commentElement = document.querySelector(".comment");
   commentElement.innerHTML = category;
-  commentElement.className =
-    "comment text-lg font-bold font-medium mt-4 " + categoryClass;
+  commentElement.className = "comment text-2xl font-bold mt-4 " + categoryClass;
 
-  document.getElementById("result").classList.add("animate-pulse");
+  const resultElement = document.getElementById("result");
+  resultElement.classList.add("opacity-0");
+  resultElement.style.transition = "transform 0.5s, opacity 0.5s";
+
   setTimeout(() => {
-    document.getElementById("result").classList.remove("animate-pulse");
+    resultElement.classList.remove("opacity-0");
+    resultElement.style.transform = "scale(1.1)";
+
+    setTimeout(() => {
+      resultElement.style.transform = "scale(1)";
+    }, 500);
+  }, 50);
+
+  setTimeout(() => {
+    resultElement.style.transition = "";
   }, 1000);
 });
 
@@ -94,11 +105,17 @@ function updateBMIIndicator(bmi) {
   bmiIndicator.classList.remove("hidden");
 
   let position;
-  if (bmi < 10) position = 0;
-  else if (bmi > 40) position = 100;
-  else {
-    position = ((bmi - 10) / 30) * 100;
+  if (bmi < 18.5) {
+    position = (bmi / 18.5) * 25;
+  } else if (bmi >= 18.5 && bmi < 25) {
+    position = 25 + ((bmi - 18.5) / 6.5) * 25;
+  } else if (bmi >= 25 && bmi < 30) {
+    position = 50 + ((bmi - 25) / 5) * 25;
+  } else {
+    let obesePosition = 75 + ((bmi - 30) / 10) * 25;
+    position = Math.min(obesePosition, 100);
   }
+  position = Math.max(0, Math.min(100, position));
 
   bmiIndicator.style.left = `${position}%`;
 }
